@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.tymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Supplier Relationship Application</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sketchy/bootstrap.min.css" rel="stylesheet" integrity="sha384-N8DsABZCqc1XWbg/bAlIDk7AS/yNzT5fcKzg/TwfmTuUqZhGquVmpb5VvfmLcMzp" crossorigin="anonymous"/>
+</head>
+<body>
+
+<div style="padding:1em;" class="container">
+    <div th:replace="fragments/navs ::topnav">
+    </div>
+    <div class="row mt-5">
+        <div class="col-3 bg-light shadow p-3 mb-5 mr-3 ml-5">
+            <div th:replace="fragments/navs ::sidenav">
+            </div>
+
+        </div>
+        <div class="col-8 bg-white">
+            <form id="supplierRegistrationForm" method="post" action="/prodsys/supplier/new" th:object="${supplier}">
+                <fieldset>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <input type="hidden" name="supplierId" th:value="${supplier.supplierId}"/>
+                                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"></span>
+                                <label for="name">Supplier Name</label>
+                                <input tabindex="1" id="name" name="name" type="text" class="form-control" value=""
+                                       th:value="${supplier.name}" required autofocus/>
+<!--                                <input tabindex="1" id="name" name="name" type="text" class="form-control" th:value="${supplier.name}"/>-->
+                            </div>
+                        </div>
+                        <div class="row mt-5 mb-5">
+                            <div class="col-md-6">
+                                <span th:if="${#fields.hasErrors('supplierNumber')}" th:errors="*{supplierNumber}"
+                                      class="alert alert-danger"></span>
+                                <label for="supplierNumber">Supplier Number</label>
+                                <input tabindex="2" id="supplierNumber" name="supplierNumber" type="number" class="form-control" th:value="${supplier.supplierNumber}" required/>
+                            </div>
+                            <div class="col-md-5">
+                                <span th:if="${#fields.hasErrors('contactPhoneNumber')}" th:errors="*{contactPhoneNumber}"
+                                      class="alert alert-danger"></span>
+                                <label for="contactPhoneNumber">Contact PhoneNumber</label>
+                                <input tabindex="3" id="contactPhoneNumber" name="contactPhoneNumber" type="text" class="form-control" th:value="${supplier.contactPhoneNumber}" required/>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-5">
+                                <div>&nbsp;</div>
+                            </div>
+                            <div class="col-md-6">
+                                <div style="text-align: right;">
+                                    <button tabindex="4" id="btnReset" type="reset" class="btn btn-outline-info" style="margin-right: 2em;">Reset</button>
+                                    <a tabindex="5" href="/prodsys/supplier/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                                    <button tabindex="6" id="btnSubmit" type="submit" class="btn btn-outline-primary">Register Supplier</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
